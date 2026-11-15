@@ -41,3 +41,8 @@ Until this is done, bookings are saved to `instance/bookings.json` so the site s
 ## Editing content
 
 Phone number, address, opening hours, services and FAQs all live in `config.py`.
+
+## Demo build
+
+`.venv/bin/python demo/build.py` writes a static, server-free copy of the site to `demo/dist`
+with simulated bookings, for sharing as a preview.
