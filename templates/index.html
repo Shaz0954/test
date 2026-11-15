@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{ b.name }} | Trusted local garage in {{ b.area }}, East London</title>
+<meta name="description" content="{{ b.name }} is a local, trustworthy garage in {{ b.area }}, East London. All mechanical work undertaken. Book online in under a minute or call {{ b.phone_display }}.">
+<meta name="theme-color" content="#0a0a0c">
+<meta property="og:title" content="{{ b.name }} | East London garage">
+<meta property="og:description" content="All mechanical work undertaken. Book online or call {{ b.phone_display }}.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0c'/%3E%3Ctext x='32' y='41' font-family='Arial' font-weight='800' font-size='22' fill='%23ff5a1f' text-anchor='middle'%3ESGT%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "name": {{ b.name|tojson }},
+  "telephone": {{ b.phone_tel|tojson }},
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": {{ b.street|tojson }},
+    "addressLocality": {{ b.city|tojson }},
+    "postalCode": {{ b.postcode|tojson }},
+    "addressCountry": "GB"
+  },
+  "areaServed": "East London",
+  "openingHoursSpecification": [
+    {% for h in hours if h.open %}{"@type": "OpeningHoursSpecification", "dayOfWeek": {{ h.day|tojson }}, "opens": {{ h.open|tojson }}, "closes": {{ h.close|tojson }}}{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#book">Skip to booking</a>
+
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a class="brand" href="#top" aria-label="{{ b.name }} home">
+      <span class="brand__mark">SGT</span><span class="brand__word">Repairs</span>
+    </a>
+    <nav class="nav__links" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#how">How it works</a>
+      <a href="#why">Why us</a>
+      <a href="#visit">Find us</a>
+    </nav>
+    <div class="nav__cta">
+      <a class="btn btn--ghost btn--sm" href="tel:{{ b.phone_tel }}">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.6a1 1 0 0 1-.25 1z"/></svg>
+        <span>{{ b.phone_display }}</span>
+      </a>
+      <a class="btn btn--primary btn--sm" href="#book">Book now</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero__glow" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="hero__grid" aria-hidden="true"></div>
+    <div class="wrap hero__content">
+      <p class="eyebrow hero__in" style="--d:0"><span class="dot" id="openDot"></span><span id="openText">{{ b.area }}, East London</span></p>
+      <h1 class="hero__title">
+        <span class="line"><span class="hero__in" style="--d:1">Honest repairs.</span></span>
+        <span class="line"><span class="hero__in grad" style="--d:2">Done properly.</span></span>
+      </h1>
+      <p class="hero__sub hero__in" style="--d:3">{{ b.name }} is your local garage in {{ b.area }}. Two mechanics, all mechanical work, and a straight answer every time.</p>
+      <div class="hero__actions hero__in" style="--d:4">
+        <a class="btn btn--primary btn--lg" href="#book">Book online <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a class="btn btn--glass btn--lg" href="tel:{{ b.phone_tel }}">Call {{ b.phone_display }}</a>
+      </div>
+      <a class="nextslot hero__in" style="--d:5" href="#book" id="nextSlot" hidden>
+        <span class="nextslot__pulse" aria-hidden="true"></span>
+        <span>Next free slot <strong id="nextSlotText"></strong></span>
+        <span class="nextslot__go">Take it &rarr;</span>
+      </a>
+    </div>
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        {% for _ in range(2) %}{% for s in services if s.id != 'other' %}<span>{{ s.name }}</span><i></i>{% endfor %}{% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="facts">
+    <div class="wrap facts__grid">
+      <div class="fact reveal"><b><span data-count="2">2</span></b><span>mechanics who know your car</span></div>
+      <div class="fact reveal" style="--i:1"><b><span data-count="6">6</span></b><span>days a week, Monday to Saturday</span></div>
+      <div class="fact reveal" style="--i:2"><b><span data-count="60">60</span><small>s</small></b><span>to book online, any time</span></div>
+      <div class="fact reveal" style="--i:3"><b>All</b><span>makes, models and mechanical work</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <div class="wrap">
+      <header class="head reveal">
+        <p class="kicker">Services</p>
+        <h2>All mechanical work.<br><span class="muted">Under one roof.</span></h2>
+      </header>
+      <div class="cards">
+        {% for s in services %}
+        <a class="card reveal{% if loop.first %} card--wide{% endif %}{% if s.id == 'other' %} card--dark{% endif %}" style="--i:{{ loop.index0 % 3 }}" href="#book" data-service="{{ s.id }}">
+          <span class="card__icon" aria-hidden="true">{% include 'icons/' ~ s.id ~ '.svg' %}</span>
+          <h3>{{ s.name }}</h3>
+          <p>{{ s.blurb }}</p>
+          <span class="card__link">Book this <span aria-hidden="true">&rarr;</span></span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark" id="how">
+    <div class="wrap">
+      <header class="head reveal">
+        <p class="kicker">How it works</p>
+        <h2>Booked in a minute.<br><span class="muted">Sorted without the stress.</span></h2>
+      </header>
+      <ol class="steps">
+        <li class="step reveal"><span class="step__n">01</span><h3>Pick a slot</h3><p>Choose the work and a time that suits you. What you see is our live workshop diary.</p></li>
+        <li class="step reveal" style="--i:1"><span class="step__n">02</span><h3>Drop the car off</h3><p>Bring it to {{ b.street }}. We look it over and tell you exactly what it needs.</p></li>
+        <li class="step reveal" style="--i:2"><span class="step__n">03</span><h3>Say yes, then drive away</h3><p>You approve the price before we start. We call you the moment it's ready.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="statement" id="why">
+    <div class="wrap">
+      <p class="kicker reveal">Why SGT</p>
+      <p class="statement__text" id="statement">We're a small garage, and we like it that way. The person you talk to is the person who fixes your car. You get a clear price before any work starts, plain English instead of jargon, and a job done right the first time.</p>
+      <div class="pillars">
+        <div class="pillar reveal"><h3>Local</h3><p>Based in {{ b.area }} and looking after cars from across East London.</p></div>
+        <div class="pillar reveal" style="--i:1"><h3>Straight talking</h3><p>We show you what's wrong and what it costs. You decide what happens next.</p></div>
+        <div class="pillar reveal" style="--i:2"><h3>Hands on</h3><p>Two mechanics, no call centre. Your car is never just a job number.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint" id="book">
+    <div class="wrap">
+      <header class="head head--center reveal">
+        <p class="kicker">Book online</p>
+        <h2>Pick a time. We'll do the rest.</h2>
+        <p class="lede">Live availability, straight from our workshop calendar. Prefer to talk? <a href="tel:{{ b.phone_tel }}">Call {{ b.phone_display }}</a>.</p>
+      </header>
+
+      <div class="booker reveal" id="booker">
+        <div class="booker__bar" aria-hidden="true"><i id="bookerBar"></i></div>
+        <ol class="booker__tabs" aria-label="Booking steps">
+          <li class="is-active" data-tab="1"><span>1</span>Work</li>
+          <li data-tab="2"><span>2</span>Time</li>
+          <li data-tab="3"><span>3</span>Details</li>
+        </ol>
+
+        <div class="booker__alert" id="bookerAlert" role="alert" hidden></div>
+
+        <section class="pane is-active" data-pane="1" aria-labelledby="p1h">
+          <h3 id="p1h" tabindex="-1">What does your car need?</h3>
+          <div class="chips" role="radiogroup" aria-labelledby="p1h">
+            {% for s in services %}
+            <label class="chip"><input type="radio" name="service" value="{{ s.id }}"><span>{{ s.name }}</span></label>
+            {% endfor %}
+          </div>
+        </section>
+
+        <section class="pane" data-pane="2" aria-labelledby="p2h">
+          <h3 id="p2h" tabindex="-1">When suits you?</h3>
+          <div class="days" id="days" role="radiogroup" aria-label="Choose a day"><div class="skeleton skeleton--days"></div></div>
+          <div class="slots" id="slots" role="radiogroup" aria-label="Choose a time" aria-live="polite"></div>
+        </section>
+
+        <section class="pane" data-pane="3" aria-labelledby="p3h">
+          <h3 id="p3h" tabindex="-1">Your details</h3>
+          <form id="detailsForm" class="form" novalidate>
+            <div class="field"><label for="f-name">Full name</label><input id="f-name" name="name" autocomplete="name" required maxlength="80"><p class="field__err" data-err="name"></p></div>
+            <div class="field"><label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="16"><p class="field__err" data-err="phone"></p></div>
+            <div class="field"><label for="f-reg">Registration</label><input id="f-reg" name="reg" class="reg" autocomplete="off" autocapitalize="characters" required maxlength="8" placeholder="AB12 CDE"><p class="field__err" data-err="reg"></p></div>
+            <div class="field"><label for="f-vehicle">Make and model <em>optional</em></label><input id="f-vehicle" name="vehicle" maxlength="60" placeholder="Ford Fiesta"></div>
+            <div class="field field--full"><label for="f-email">Email <em>optional</em></label><input id="f-email" name="email" type="email" autocomplete="email" maxlength="120"><p class="field__err" data-err="email"></p></div>
+            <div class="field field--full"><label for="f-notes">Anything we should know? <em>optional</em></label><textarea id="f-notes" name="notes" rows="3" maxlength="600" placeholder="Noises, warning lights, when it started..."></textarea></div>
+            <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
+          </form>
+        </section>
+
+        <section class="pane pane--done" data-pane="4" aria-labelledby="p4h">
+          <div class="tick" aria-hidden="true"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M15 27l7.5 7.5L38 19"/></svg></div>
+          <h3 id="p4h" tabindex="-1">You're booked in.</h3>
+          <p class="done__when" id="doneWhen"></p>
+          <p class="done__ref">Booking reference <strong id="doneRef"></strong></p>
+          <p class="done__note">Bring the car to {{ b.street }}, {{ b.postcode }}. Need to change anything? Call us on <a href="tel:{{ b.phone_tel }}">{{ b.phone_display }}</a>.</p>
+          <div class="done__actions">
+            <a class="btn btn--primary" id="doneGcal" target="_blank" rel="noopener">Add to Google Calendar</a>
+            <button class="btn btn--outline" id="doneIcs" type="button">Apple / Outlook (.ics)</button>
+          </div>
+        </section>
+
+        <footer class="booker__foot" id="bookerFoot">
+          <p class="booker__summary" id="summary" aria-live="polite"></p>
+          <div class="booker__btns">
+            <button class="btn btn--outline" id="backBtn" type="button" hidden>Back</button>
+            <button class="btn btn--primary" id="nextBtn" type="button" disabled>Continue</button>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="visit">
+    <div class="wrap visit">
+      <div class="visit__info reveal">
+        <p class="kicker">Find us</p>
+        <h2>Come and see us<br><span class="muted">in {{ b.area }}.</span></h2>
+        <address>{{ b.street }}<br>{{ b.area }}, {{ b.city }} {{ b.postcode }}</address>
+        <div class="visit__actions">
+          <a class="btn btn--primary" href="https://www.google.com/maps/dir/?api=1&destination={{ b.maps_query|urlencode }}" target="_blank" rel="noopener">Get directions</a>
+          <a class="btn btn--outline" href="tel:{{ b.phone_tel }}">Call {{ b.phone_display }}</a>
+        </div>
+        <table class="hours" id="hours">
+          <caption>Opening hours</caption>
+          {% for h in hours %}
+          <tr data-day="{{ loop.index0 }}"><th scope="row">{{ h.day }}</th><td>{% if h.open %}{{ h.open }} to {{ h.close }}{% else %}Closed{% endif %}</td></tr>
+          {% endfor %}
+        </table>
+      </div>
+      <div class="visit__map reveal" style="--i:1">
+        <iframe title="Map showing {{ b.name }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q={{ b.maps_query|urlencode }}&output=embed"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint" id="faq">
+    <div class="wrap wrap--narrow">
+      <header class="head head--center reveal"><p class="kicker">Questions</p><h2>Good to know.</h2></header>
+      <div class="faq">
+        {% for q, a in faqs %}
+        <details class="reveal"><summary>{{ q }}<span aria-hidden="true"></span></summary><p>{{ a }}</p></details>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="hero__glow" aria-hidden="true"><i></i><i></i></div>
+    <div class="wrap reveal">
+      <h2>Car playing up?<br><span class="grad">Let's get it sorted.</span></h2>
+      <div class="hero__actions">
+        <a class="btn btn--primary btn--lg" href="#book">Book online <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <a class="btn btn--glass btn--lg" href="tel:{{ b.phone_tel }}">Call {{ b.phone_display }}</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <div><a class="brand" href="#top"><span class="brand__mark">SGT</span><span class="brand__word">Repairs</span></a><p>{{ b.street }}, {{ b.area }}, {{ b.city }} {{ b.postcode }}</p></div>
+    <nav aria-label="Footer"><a href="#services">Services</a><a href="#book">Book</a><a href="#visit">Find us</a><a href="tel:{{ b.phone_tel }}">{{ b.phone_display }}</a></nav>
+    <p class="footer__copy">&copy; {{ year }} {{ b.name }}. All rights reserved.</p>
+  </div>
+</footer>
+
+<div class="dock" id="dock">
+  <a class="btn btn--glass" href="tel:{{ b.phone_tel }}">Call</a>
+  <a class="btn btn--primary" href="#book">Book online</a>
+</div>
+
+<script id="site-data" type="application/json">{{ site_data|tojson }}</script>
+<script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</body>
+</html>
