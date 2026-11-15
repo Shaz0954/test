@@ -5,11 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{{ b.name }} | Trusted local garage in {{ b.area }}, East London</title>
 <meta name="description" content="{{ b.name }} is a local, trustworthy garage in {{ b.area }}, East London. All mechanical work undertaken. Book online in under a minute or call {{ b.phone_display }}.">
-<meta name="theme-color" content="#0a0a0c">
+<meta name="theme-color" content="#07080c">
 <meta property="og:title" content="{{ b.name }} | East London garage">
 <meta property="og:description" content="All mechanical work undertaken. Book online or call {{ b.phone_display }}.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0c'/%3E%3Ctext x='32' y='41' font-family='Arial' font-weight='800' font-size='22' fill='%23ff5a1f' text-anchor='middle'%3ESGT%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='img/logo-192.png') }}">
+<link rel="apple-touch-icon" href="{{ url_for('static', filename='img/logo-192.png') }}">
+<meta property="og:image" content="{{ url_for('static', filename='img/logo.jpg', _external=True) }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <script type="application/ld+json">
 {
@@ -38,7 +40,7 @@
 <header class="nav" id="nav">
   <div class="nav__inner">
     <a class="brand" href="#top" aria-label="{{ b.name }} home">
-      <span class="brand__mark">SGT</span><span class="brand__word">Repairs</span>
+      <img src="{{ url_for('static', filename='img/logo-192.png') }}" alt="" width="38" height="38"><span class="brand__mark">SGT</span><span class="brand__word">Repair</span>
     </a>
     <nav class="nav__links" aria-label="Main">
       <a href="#services">Services</a>
@@ -61,10 +63,11 @@
     <div class="hero__glow" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="hero__grid" aria-hidden="true"></div>
     <div class="wrap hero__content">
+      <div class="hero__logo hero__in" style="--d:0"><img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="{{ b.name }} logo" width="634" height="634"></div>
       <p class="eyebrow hero__in" style="--d:0"><span class="dot" id="openDot"></span><span id="openText">{{ b.area }}, East London</span></p>
       <h1 class="hero__title">
-        <span class="line"><span class="hero__in" style="--d:1">Honest repairs.</span></span>
-        <span class="line"><span class="hero__in grad" style="--d:2">Done properly.</span></span>
+        <span class="line"><span class="hero__in" style="--d:1">Service you can trust.</span></span>
+        <span class="line"><span class="hero__in grad" style="--d:2">Performance you can feel.</span></span>
       </h1>
       <p class="hero__sub hero__in" style="--d:3">{{ b.name }} is your local garage in {{ b.area }}. Two mechanics, all mechanical work, and a straight answer every time.</p>
       <div class="hero__actions hero__in" style="--d:4">
@@ -255,7 +258,7 @@
 
 <footer class="footer">
   <div class="wrap footer__inner">
-    <div><a class="brand" href="#top"><span class="brand__mark">SGT</span><span class="brand__word">Repairs</span></a><p>{{ b.street }}, {{ b.area }}, {{ b.city }} {{ b.postcode }}</p></div>
+    <div><a class="brand" href="#top"><img src="{{ url_for('static', filename='img/logo-192.png') }}" alt="" width="38" height="38"><span class="brand__mark">SGT</span><span class="brand__word">Repair</span></a><p>{{ b.street }}, {{ b.area }}, {{ b.city }} {{ b.postcode }}</p></div>
     <nav aria-label="Footer"><a href="#services">Services</a><a href="#book">Book</a><a href="#visit">Find us</a><a href="tel:{{ b.phone_tel }}">{{ b.phone_display }}</a></nav>
     <p class="footer__copy">&copy; {{ year }} {{ b.name }}. All rights reserved.</p>
   </div>

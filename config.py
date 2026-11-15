@@ -1,7 +1,7 @@
-"""Business details for SGT Repairs. Edit this file to change anything shown on the site."""
+"""Business details for SGT Repair. Edit this file to change anything shown on the site."""
 
 BUSINESS = {
-    "name": "SGT Repairs",
+    "name": "SGT Repair",
     "tagline": "Your local East London garage",
     "phone_display": "07988 398813",
     "phone_tel": "+447988398813",

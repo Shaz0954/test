@@ -278,13 +278,13 @@
     const i = state.ics;
     if (!i) return;
     const esc = (s) => String(s).replace(/[\;,]/g, '\\$&').replace(/\n/g, '\\n');
-    const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//SGT Repairs//Booking//EN', 'BEGIN:VEVENT',
-      `UID:${i.uid}@sgt-repairs`, `DTSTAMP:${i.start}`, `DTSTART:${i.start}`, `DTEND:${i.end}`,
+    const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//SGT Repair//Booking//EN', 'BEGIN:VEVENT',
+      `UID:${i.uid}@sgt-repair`, `DTSTAMP:${i.start}`, `DTSTART:${i.start}`, `DTEND:${i.end}`,
       `SUMMARY:${esc(i.title)}`, `DESCRIPTION:${esc(i.details)}`, `LOCATION:${esc(i.location)}`,
       'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
-    a.download = `sgt-repairs-${i.uid}.ics`;
+    a.download = `sgt-repair-${i.uid}.ics`;
     a.click();
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   });

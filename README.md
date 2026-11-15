@@ -1,6 +1,6 @@
-# SGT Repairs website
+# SGT Repair website
 
-Single-page site for SGT Repairs (79-81 Cobbold Road, Leytonstone, London E11 3NS) with
+Single-page site for SGT Repair (79-81 Cobbold Road, Leytonstone, London E11 3NS) with
 online booking that reads and writes a Google Calendar.
 
 ## Run it
