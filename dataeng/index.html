@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DataEng Academy — learn data engineering by doing</title>
+  <meta name="description" content="An interactive, in-browser course that takes you from your first SELECT to designing production data platforms.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%236c8cff'/%3E%3Cpath d='M8 11c0-2 3.6-3 8-3s8 1 8 3-3.6 3-8 3-8-1-8-3zm0 5c0 2 3.6 3 8 3s8-1 8-3m-16 5c0 2 3.6 3 8 3s8-1 8-3' fill='none' stroke='white' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="boot"><div class="boot-logo"></div><p>Warming up the database…</p></div>
+
+  <div class="app" hidden>
+    <header class="topbar">
+      <button class="icon-btn" id="menu-btn" aria-label="Open menu"></button>
+      <a class="brand" href="#/"><span class="brand-mark"></span>DataEng Academy</a>
+    </header>
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#/"><span class="brand-mark"></span><span>DataEng<br><small>Academy</small></span></a>
+      <button class="search-btn" id="search-btn"><span id="search-ico"></span>Search<kbd>Ctrl K</kbd></button>
+      <nav id="nav"></nav>
+      <div class="side-foot">
+        <a class="level-card" href="#/" id="level-card"></a>
+        <div class="side-actions">
+          <button class="ghost" id="theme-btn" title="Toggle light / dark theme"></button>
+          <button class="ghost" id="reset-btn" title="Erase all progress">Reset progress</button>
+        </div>
+      </div>
+    </aside>
+    <div class="scrim" id="scrim"></div>
+    <main id="main" tabindex="-1"></main>
+  </div>
+
+  <div id="toasts" aria-live="polite"></div>
+  <div id="palette" hidden>
+    <div class="palette-box" role="dialog" aria-label="Search">
+      <input id="palette-input" type="text" placeholder="Search lessons, tools, simulators, glossary…" autocomplete="off" spellcheck="false">
+      <ul id="palette-list"></ul>
+    </div>
+  </div>
+
+  <script src="vendor/sql-wasm.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
